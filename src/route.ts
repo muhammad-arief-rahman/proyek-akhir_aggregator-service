@@ -1,0 +1,17 @@
+import { Router } from "express"
+import { MainController, UnitController, UserController } from "./controllers"
+import AuthMiddleware from "@ariefrahman39/shared-utils"
+
+const router = Router()
+
+router.get("/", MainController.root)
+
+router.get("/units", UnitController.fullData)
+
+router.get(
+  "/user-with-customer",
+  AuthMiddleware.authenticate("admin"),
+  UserController.userWithCustomer
+)
+
+export default router
