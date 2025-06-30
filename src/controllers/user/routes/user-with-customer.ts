@@ -6,8 +6,6 @@ export const userWithCustomer: RequestHandler = async (req, res) => {
   try {
     const token =
       req.headers.authorization?.split(" ")[1] || req.cookies?.token || ""
-
-      console.log("Token:", token)
       
     const userQuery = axios.get(`${process.env.AUTH_SERVICE_URL}/users`, {
       headers: {

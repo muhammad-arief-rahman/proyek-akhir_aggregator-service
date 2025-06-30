@@ -1,7 +1,7 @@
 import { response } from "@ariefrahman39/shared-utils"
 import express from "express"
 import multer from "multer"
-import router from "./src/route"
+import router from "./src/routes"
 import cookieParser from "cookie-parser"
 
 const app = express()

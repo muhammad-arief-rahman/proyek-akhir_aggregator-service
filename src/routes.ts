@@ -14,4 +14,10 @@ router.get(
   UserController.userWithCustomer
 )
 
+router.get(
+  "/user-with-customer/:id",
+  AuthMiddleware.authenticate("admin"),
+  UserController.userWithCustomerDetail
+)
+
 export default router
