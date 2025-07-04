@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { MainController, UnitController, UserController } from "./controllers"
-import AuthMiddleware from "@ariefrahman39/shared-utils"
+import SparePartController from "./controllers/spare-part"
+import { AuthMiddleware } from "@ariefrahman39/shared-utils"
 
 const router = Router()
 
@@ -19,5 +20,7 @@ router.get(
   AuthMiddleware.authenticate("admin"),
   UserController.userWithCustomerDetail
 )
+
+router.get("/spare-part-with-units", SparePartController.getAllWithUnit)
 
 export default router
