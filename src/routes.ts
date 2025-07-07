@@ -23,4 +23,6 @@ router.get(
 
 router.get("/spare-part-with-units", SparePartController.getAllWithUnit)
 
+router.get('/unit-details-with-customer/:id', UnitController.unitDetailsWithCustomer)
+
 export default router

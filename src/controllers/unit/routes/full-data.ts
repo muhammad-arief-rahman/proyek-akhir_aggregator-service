@@ -2,7 +2,7 @@ import { internalServerError, response } from "@ariefrahman39/shared-utils"
 import axios from "axios"
 import type { RequestHandler } from "express"
 
-export const fullData: RequestHandler = async (req, res) => {
+const fullData: RequestHandler = async (req, res) => {
   try {
     const [unitResponse] = await Promise.allSettled([
       await axios.get(`${process.env.UNIT_SERVICE_URL}/data`),
@@ -23,3 +23,5 @@ export const fullData: RequestHandler = async (req, res) => {
     internalServerError(res, error)
   }
 }
+
+export default fullData
