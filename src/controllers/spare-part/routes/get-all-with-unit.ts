@@ -1,5 +1,6 @@
 import {
   type APIResponse,
+  getAuthToken,
   internalServerError,
   response,
 } from "@ariefrahman39/shared-utils"
@@ -12,12 +13,25 @@ const getAllWithUnit: RequestHandler = async (req, res) => {
   try {
     const [sparePartResult, unitResult] = await Promise.allSettled([
       axios.get<APIResponse<SparePartData[]>>(
-        `${process.env.MAINTENANCE_SERVICE_URL}/spare-parts`
+        `${process.env.MAINTENANCE_SERVICE_URL}/spare-parts`,
+        {
+          headers: {
+            Authorization: `Bearer ${getAuthToken(req)}`,
+          },
+        }
       ),
       axios.get<APIResponse<BaseUnitData[]>>(
-        `${process.env.UNIT_SERVICE_URL}/base-data?withCompound=true&noPagination=true`
+        `${process.env.UNIT_SERVICE_URL}/base-data?withCompound=true&noPagination=true`,
+        {
+          headers: {
+            Authorization: `Bearer ${getAuthToken(req)}`,
+          },
+        }
       ),
     ])
+
+    console.log("Spare part result:", sparePartResult)
+    console.log("Unit result:", unitResult)
 
     if (sparePartResult.status === "rejected") {
       response(res, 500, "Failed to fetch initial spare parts")

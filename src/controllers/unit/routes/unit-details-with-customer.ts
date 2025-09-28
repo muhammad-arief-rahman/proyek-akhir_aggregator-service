@@ -35,7 +35,6 @@ const unitDetailsWithCustomer: RequestHandler = async (req, res) => {
       const customerData = await axios.get<APIResponse<CustomerData>>(
         `${process.env.CUSTOMER_SERVICE_URL}/data/details/${unitInstance.organizationId}`
       )
-      
 
       customer = customerData.data.data
     } catch (error) {
